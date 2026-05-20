@@ -1,27 +1,50 @@
-# 🎮 Big Data Project — Steam Market Analysis (Ubisoft)
-The dataset is available in our S3 bucket at the following url: s3://full-stack-bigdata-datasets/Big_Data/Project_Steam/steam_game_output.json.
+# 🎮 Projet Big Data — Analyse Globale du Marché Steam (Ubisoft)
 
-## 🎯 Objectifs du Projet
-Ce projet d'Analyse Exploratoire de Données (EDA) a été réalisé dans un contexte de Business Intelligence pour le compte d'Ubisoft. L'objectif principal est d'analyser globalement le marché de la plateforme Steam à l'aide de technologies Big Data afin de modéliser et comprendre les facteurs clés qui dictent la popularité, la satisfaction et la rentabilité (chiffre d'affaires estimé) des jeux vidéo.
-
----
-
-## 📬 Livrables & Liens Databricks Publics
-
-Pour des raisons d'optimisation de la mémoire et pour respecter les contraintes techniques de taille de publication de Databricks, le projet a été scindé en deux volets complémentaires :
-
-* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro](https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392)**
-  * *Contenu :* Connexion au bucket Amazon S3 (`s3://...`), flattening dynamique des structures complexes et imbriquées du JSON (gestion des tags), typage strict des données, étude de la temporalité des sorties (impact de la période Covid-19), distribution globale des structures de prix, étude de l'internationalisation (langues) et des restrictions d'âge.
-  * *Outils :* PySpark SQL, API Regexp, Databricks native charting.
-
-* **[🔗 Partie 2 : Analyses Segmentées — Genres & Plateformes](https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)**
-  * *Contenu :* Analyse unitaire et avancée des genres via l'explosion des tableaux de données composites (`F.explode`), calcul des ratios réels de satisfaction de l'audience, modélisation des stratégies de spécialisation des éditeurs via l'usage de fonctions de fenêtrage avancées (`Window.partitionBy`), estimation financière du chiffre d'affaires brut par segment et cartographie des préférences de portages techniques (Windows vs Mac vs Linux).
-  * *Outils :* PySpark Window Functions, Multidimensional Aggregations.
+## 🎯 Objectif du Projet
+L'objectif de ce projet est d'exploiter les capacités de traitement de PySpark pour analyser le catalogue de la plateforme Steam. En adoptant différents niveaux de granularité, cette étude cartographie l'écosystème PC afin d'identifier les facteurs clés qui influencent directement la popularité, la satisfaction des joueurs et la rentabilité financière des jeux vidéo pour guider les futurs lancements d'Ubisoft.
 
 ---
 
-## 🚀 Synthèse Décisionnelle : Facteurs Clés de Succès
+## 💾 Source des Données
+Les analyses s'appuient sur un jeu de données semi-structuré (JSON) regroupant l'ensemble des métadonnées des jeux :
+* **Lien du Dataset S3 :** `s3://full-stack-bigdata-datasets/Big_Data/Project_Steam/steam_game_output.json`
 
-1. **Hégémonie du modèle Premium sur l'Action/RPG :** Bien que les jeux indépendants à bas coût saturent les volumes de publication, la valeur financière et l'engagement de masse se concentrent sur les segments Action et RPG, validant le positionnement AAA d'Ubisoft.
-2. **Priorisation technologique de l'infrastructure Windows :** Windows détient un monopole de fait (99% de disponibilité globale). Les portages macOS/Linux ne se justifient économiquement que sur les genres légers (Casual/Stratégie 2D) portés par des moteurs tiers automatisés (Unity/Godot).
-3. **Criticité de la réputation initiale :** Les genres grand public souffrent d'une forte volatilité des avis. Une exécution technique irréprochable au Jour J est indispensable pour maintenir le score algorithmique sur le magasin Steam.
+---
+
+## 📬 Liens des Notebooks Databricks Publics
+
+Pour contourner les contraintes techniques liées à la taille limite de publication de Databricks, le projet a été scindé en deux volets autonomes et complémentaires :
+
+* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro] lien databriks:(https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392)**
+  * *Périmètre :* Connexion au stockage Amazon S3, extraction et aplatissement dynamique (*flattening*) des structures imbriquées du schéma JSON (gestion des tags), typage strict des données et analyses macro-économiques.
+* **[🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes] lien databriks: (https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)**
+  * *Périmètre :* Explosion des chaînes de caractères de données composites (`F.explode`), calcul des taux de satisfaction réels, fonctions de fenêtrage avancées (`Window.partitionBy`) pour analyser les stratégies éditeurs, modélisation des revenus et matrices de compatibilité technique.
+
+---
+
+## 📊 Tableau Récapitulatif : Questions & Réponses Métier
+
+| Question de l'énoncé | Approche technique (PySpark) | Ce que révèlent nos données brutes | Impact Stratégique (Ubisoft) |
+| :--- | :--- | :--- | :--- |
+| **Q1: Most prolific publisher?** | `groupBy("publisher")` + tri décroissant. | Identification des éditeurs leaders en volume de jeux sortis. | Cartographie fine de la présence de la concurrence sur la boutique. |
+| **Q2: Best rated games?** | Ratio d'avis positifs pondéré avec un filtre de confiance `> 50` avis. | Les jeux de premier plan maintiennent des scores d'approbation très élevés. | La réputation algorithmique est le premier vecteur de découvrabilité. |
+| **Q3: Impact of Covid-19?** | Extraction de l'année par regex + agrégation temporelle. | **Pic massif de sorties en 2020 (9 501 jeux) et 2021 (11 391 jeux)** contre environ 7 000 en 2018. | Le marché a subi une forte accélération de l'offre suite aux confinements. |
+| **Q4: Price distribution & discounts?** | Segmentation par tranches de prix et analyse du champ `discount`. | **Une écrasante majorité de jeux sont à moins de 5$ ou Free-to-Play.** La présence de promotions est un standard. | Le catalogue Steam est saturé par des micro-produits à bas coût. |
+| **Q5: Most represented languages?** | `groupBy("languages")` + décompte. | **L'anglais domine massivement le marché (plus de 41 000 jeux)**, suivi de loin par le chinois et le russe. | La localisation linguistique complète (Anglais/Chinois) est obligatoire pour performer. |
+| **Q6: Prohibited for children (16/18)?** | Filtrage et extraction numérique sur `required_age`. | Les jeux avec restrictions strictes d'âge représentent une part minoritaire mais stable du catalogue. | Le marché adulte (16+/18+) reste viable pour les productions AAA complexes. |
+| **Q7: Most represented genres?** | `F.explode(F.split(genre))` pour isoler les genres unitaires. | **Les catégories Indie (37 671), Action (19 862) et Adventure (17 072)** saturent l'offre de titres. | Les genres phares d'Ubisoft font face à la plus forte concurrence en volume. |
+| **Q8: Better review ratio by genre?** | Moyenne de la note calculée groupée par genre unitaire. | Les genres de niche ciblés (**RPG, Simulation, Stratégie**) maintiennent des scores de satisfaction élevés et stables. | Les communautés ciblées sont plus fidèles si la promesse de gameplay est tenue. |
+| **Q9: Publishers favorite genres?** | Fenêtrage analytique `Window` + filtrage sur le Rang 1. | Les grands éditeurs n'éparpillent pas leurs efforts : ils se spécialisent sur un genre maître. | Permet de détecter la couleur éditoriale et la spécialisation de chaque concurrent. |
+| **Q10: Most lucrative genres?** | Calcul du chiffre d'affaires estimé : `(positive + negative) * price`. | **L'Action et l'Aventure écrasent financièrement le marché** (plus de 170M$ de CA estimé combiné). | Malgré le volume des jeux indépendants, les gros budgets d'Action captent l'essentiel de la valeur. |
+| **Q11: Platform availability?** | Somme des variables binaires converties divisée par le total. | **Windows détient un monopole absolu (99,9%)**. Mac (11,4%) et Linux (7,4%) sont très marginaux. | Windows est le passage obligé. Ignorer Mac/Linux n'impacte pas la viabilité commerciale. |
+| **Q12: Preferential OS availability?** | Taux de compatibilité des OS croisés par genre unitaire. | Les genres légers (*Casual/Indie*) s'exportent plus sur Mac/Linux. **Les jeux d'Action AAA restent exclusifs à Windows.** | Les investissements de portage sur les moteurs lourds propriétaires doivent viser Windows en priorité. |
+
+---
+
+## 🚀 Synthèse Décisionnelle : Les Facteurs de Ventes sur Steam
+
+L'analyse de nos données met en évidence trois piliers fondamentaux pour maximiser les performances commerciales :
+
+1. **La concentration de la valeur financière (Action / RPG) :** Bien que le catalogue de Steam soit saturé en volume par des milliers de productions indépendantes (`Indie`), la captation réelle de valeur financière se concentre sur les genres **Action** et **RPG**. Cela valide scientifiquement la stratégie d'Ubisoft de continuer à investir sur des productions Premium de grande envergure (AAA).
+2. **La rationalisation technique de la R&D :** Windows centralise la quasi-totalité de l'écosystème. Les taux de compatibilité macOS et Linux sur les genres exigeants (Action/Aventure) étant extrêmement faibles, le coût de développement et d'optimisation d'un moteur lourd sur ces plateformes n'offre aucun retour sur investissement. L'effort doit rester focalisé sur l'environnement Windows.
+3. **Le contrôle impératif de la réputation au Jour J :** Les genres grand public subissent une forte volatilité des avis. Comme le démontre l'analyse des scores, les barrières algorithmiques de Steam détruisent la visibilité des jeux subissant un lancement technique manqué. Une exécution et une phase de QA irréprochables au lancement sont indispensables pour préserver la dynamique des ventes.

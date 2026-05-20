@@ -48,3 +48,14 @@ Ce notebook est conçu pour être exécuté directement sur **Databricks** via u
 Pour une exécution ou un développement sur une infrastructure locale, installez l'environnement de calcul via pip :
 ```bash
 pip install pyspark
+
+---
+
+## 🛠️ Stack technique
+Databricks (Free Edition)
+Apache Spark / PySpark
+AWS S3
+
+Auteur
+Projet réalisé dans le cadre du Bloc 2 — Big Data à Jedha Bootcamp.
+By Alicia MARZOUK

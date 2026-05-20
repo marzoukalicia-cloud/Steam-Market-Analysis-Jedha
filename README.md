@@ -58,9 +58,13 @@ pip install pyspark
 
 ## 💻 Stack Technique
 Outil,Usage
+
 PySpark,"Traitement distribué des données (DataFrames, transformations complexes, Window Functions, Regex)"
+
 Databricks,"Environnement d'exécution cloud, visualisation avancée (Charts natifs) et dashboarding"
+
 AWS S3,"Data Lake cloud, stockage de la source JSON brute distribuée"
+
 Python,"Langage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)"
 
 ## 🚀 Synthèse Décisionnelle : Qu'est-ce qui dicte les ventes sur Steam ?

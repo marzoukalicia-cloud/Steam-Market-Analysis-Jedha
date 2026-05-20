@@ -15,9 +15,9 @@ L'intégralité de l'analyse repose sur un jeu de données semi-structuré (JSON
 ## 📬 Liens des Notebooks Databricks Publics
 Pour contourner les contraintes techniques de taille limite de publication de Databricks et garantir une exécution mémoire optimale sur nos clusters, le projet a été découpé en deux volets hautement spécialisés :
 
-* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro] lien databriks: ([https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392])**
+* **🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro/lien databriks: ([https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392])**
   * *Périmètre technique :* Connexion sécurisée au stockage Amazon S3, extraction et aplatissement dynamique (*flattening*) du schéma JSON imbriqué, typage strict des données et analyses macro-économiques (Q1 à Q6 + Q13).
-* **[🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes] lien databriks: ([[COLLE_ICI_TON_LIEN_PUBLISHED_2](https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)])**
+* **🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes/lien databriks: ([[COLLE_ICI_TON_LIEN_PUBLISHED_2](https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)])**
   * *Périmètre technique :* Explosion des chaînes de caractères composites (`F.explode`) pour normaliser et isoler les genres de façon unitaire, implémentation de fonctions de fenêtrage analytiques avancées (`Window.partitionBy`), calculs de proxys de performance financière et matrices de compatibilité technique par OS (Q7 à Q12).
 
 ---

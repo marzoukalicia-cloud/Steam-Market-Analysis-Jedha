@@ -30,21 +30,21 @@ Pour contourner les contraintes techniques de taille limite de publication de Da
 
 ## 📊 Pipeline d'Analyse : Questions & Réponses Métier
 
-| # | Question traitée | Approche technique (PySpark) | Ce que révèlent nos données brutes | Impact Stratégique (Ubisoft) |
+| # | Question traitée | Approche technique (PySpark) | Résultats du Catalogue (Énoncé) | Levier Stratégique (Ubisoft) |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | **Top publishers et developers** | `groupBy("publisher")` + tri décroissant. | Identification des éditeurs leaders en volume de titres sortis sur la boutique. | Permet de cartographier précisément le volume d'occupation de la concurrence sur la plateforme. |
-| **2** | **Sorties par année + focus COVID** | Extraction de l'année par regex + agrégation temporelle. | **Pic massif de sorties en 2020 (9 501 jeux) et 2021 (11 391 jeux)** contre environ 7 000 en 2018. | Le marché a subi une accélération phénoménale de l'offre, augmentant drastiquement le niveau de saturation. |
-| **3** | **Distribution des prix** | Segmentation par tranches de prix (`F.when`). | **Une écrasante majorité de jeux sont vendus à moins de 5$ ou sont Free-to-Play.** | Le catalogue Steam est structurellement saturé par des micro-produits indépendants à bas coût. |
-| **4** | **Top langues supportées** | `groupBy("languages")` + décompte global. | **L'anglais domine avec plus de 41 000 jeux**, suivi par le chinois et le russe. | La localisation linguistique complète (notamment le Chinois) est obligatoire pour maximiser l'audience cible. |
-| **5** | **Restrictions d'âge (16+/18+)** | Filtrage et extraction numérique sur `required_age`. | Les jeux avec restrictions strictes d'âge représentent une part minoritaire mais stable du catalogue. | Le marché mature (16+/18+) reste parfaitement viable pour les productions AAA complexes d'Ubisoft. |
-| **6** | **Hall of Fame (top 10 jeux)** | Ratio d'avis positifs pondéré avec un filtre de confiance `>&nbsp;50` avis. | Les jeux majeurs de premier plan maintiennent des scores d'approbation publique extrêmement élevés. | La réputation algorithmique initiale est le premier levier de découvrabilité sur la boutique. |
-| **7** | **Genres les plus représentés** | `F.explode(F.split(genre))` pour isoler les genres unitaires. | **Les catégories Indie (37 671), Action (19 862) et Adventure (17 072)** saturent l'offre de titres. | Les genres phares d'Ubisoft font face à la plus forte intensité concurrentielle en volume. |
-| **8** | **Rating moyen par genre** | Moyenne de la note calculée groupée par genre unitaire explosé. | Les genres de niche ciblés (**RPG, Simulation, Stratégie**) maintiennent des scores de satisfaction très stables. | Les communautés spécialisées se révèlent plus fidèles si la promesse de gameplay est tenue. |
-| **9** | **Genres les plus lucratifs** | Analyse des prix moyens et des volumes de ventes estimés par genre. | Les genres à forte rejouabilité et de niche conservent des prix moyens d'entrée plus résilients. | Permet d'ajuster la grille tarifaire d'un titre selon la propension à payer de sa communauté. |
-| **10** | **ADN des éditeurs par genre** | Fenêtrage analytique `Window` + filtrage sur le Rang 1 du volume. | Les grands éditeurs n'éparpillent pas leurs efforts : ils se spécialisent massivement sur un genre maître. | Permet de détecter la couleur éditoriale historique et le savoir-faire technique de chaque concurrent. |
-| **11** | **Distribution Win/Mac/Linux** | Somme des variables binaires converties divisée par le volume total. | **Windows détient un monopole absolu (99,9%)**. Mac (11,4%) et Linux (7,4%) sont très marginaux. | Windows est le passage obligé. Ignorer Mac/Linux n'impacte pas la viabilité commerciale globale. |
-| **12** | **Support OS par genre** | Taux de compatibilité des OS croisés par genre unitaire propre. | Les genres légers (*Casual/Indie*) s'exportent plus sur Mac/Linux. **Les jeux d'Action AAA restent exclusifs à Windows.** | Les investissements de portage sur les moteurs lourds propriétaires doivent viser Windows en priorité. |
-| **13** | **Analyse des promotions** | Calcul des pourcentages sur le champ binaire/calculé `discount`. | La présence de remises de prix et de soldes est un standard de comportement d'achat sur la plateforme. | Les mécaniques promotionnelles sont indispensables pour relancer le cycle de vie commercial d'un jeu. |
+| **1** | **Top publishers et developers** | `groupBy("publisher")` + tri décroissant. | **Big Fish Games** est l'éditeur qui a publié le plus de jeux. | Révèle une stratégie d'occupation de l'espace par des acteurs spécialisés dans le volume de jeux Casual. |
+| **2** | **Sorties par année + focus COVID** | Extraction de l'année par regex + agrégation temporelle. | **2021** est l'année avec le plus de sorties de jeux. | Confirme l'explosion de l'offre et de la concurrence post-crise sanitaire. |
+| **3** | **Distribution des prix** | Segmentation par tranches de prix (`F.when`). | **La majorité des jeux ont un prix inférieur à 4,99$.** | Le marché PC est inondé de titres à très bas coût, imposant une forte barrière à la visibilité. |
+| **4** | **Top langues supportées** | `groupBy("languages")` + décompte global. | **L'anglais, le chinois simplifié, le russe et le portugais brésilien** sont les plus représentés. | La localisation internationale ne doit plus se limiter au bloc occidental (EFIGS). |
+| **5** | **Restrictions d'âge (16+/18+)** | Filtrage et extraction numérique sur `required_age`. | Les jeux réservés aux adultes forment une **part minoritaire** du catalogue Steam. | L'audience générale reste le cœur du volume, mais les niches matures restent viables si ciblées. |
+| **6** | **Hall of Fame (top 10 jeux)** | Ratio d'avis positifs pondéré avec un filtre de confiance `> 50` avis. | **Portal 2 et Left 4 Dead 2** dominent le classement des jeux les mieux notés. | Souligne l'importance de l'engagement communautaire et de la rejouabilité pour rester au sommet. |
+| **7** | **Genres les plus représentés** | `F.explode(F.split(genre))` pour isoler les genres unitaires. | Le genre **Indie** domine largement le catalogue en nombre absolu de titres. | Intensité concurrentielle extrême sur le secteur indépendant. |
+| **8** | **Rating moyen par genre** | Moyenne de la note calculée groupée par genre unitaire explosé. | Les genres **RPG et Simulation** obtiennent globalement les meilleurs avis des joueurs. | Ces genres bénéficient de fortes mécaniques d'attachement et d'une communauté d'ultra-passionnés. |
+| **9** | **Genres les plus lucratifs** | Analyse des prix moyens et des volumes de ventes estimés par genre. | Les genres **Simulation et Strategy** affichent le prix moyen le plus élevé du marché. | Démontre une plus forte propension à payer des joueurs pour des expériences complexes et chronophages. |
+| **10** | **ADN des éditeurs par genre** | Fenêtrage analytique `Window` + filtrage sur le Rang 1 du volume. | Les éditeurs ont une tendance marquée à la **spécialisation** sur un ou deux genres spécifiques. | Valide le besoin pour Ubisoft de capitaliser sur ses piliers historiques (Action/Aventure) sans s'éparpiller. |
+| **11** | **Distribution Win/Mac/Linux** | Somme des variables binaires converties divisée par le volume total. | Les jeux sont disponibles **très majoritairement sur Windows**, les autres OS étant très marginaux. | Windows demeure le passage obligatoire pour rentabiliser n'importe quel investissement PC. |
+| **12** | **Support OS par genre** | Taux de compatibilité des OS croisés par genre unitaire propre. | Les genres **Casual et Indie** privilégient plus l'accessibilité multi-plateforme (Mac/Linux). | Les jeux d'Action lourds économisent les coûts de portage en ciblant exclusivement Windows. |
+| **13** | **Analyse des promotions** | Calcul des pourcentages sur le champ binaire/calculé `discount`. | **Une part significative** du catalogue profite régulièrement de remises et soldes. | La promotion n'est pas un événement rare mais un outil standard d'acquisition de parts de marché. |
 
 ---
 
@@ -65,16 +65,18 @@ AWS S3: Data Lake cloud, stockage de la source JSON brute distribuée
 
 Python: Langage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)
 
-## 🚀 Synthèse Décisionnelle : 
-Qu'est-ce qui dicte les ventes sur Steam ?Based on the global analysis of the 55,000 games on Steam, several critical drivers determine a video game's visibility, engagement, and financial outcome:Windows Hegemony: Windows represents the absolute standard for PC gaming, maintaining a near 100% availability rate across all analyzed categories.
+## 🚀 Synthèse Décisionnelle : Qu'est-ce qui dicte les ventes sur Steam ?
+Based on the official metrics and global analysis of the 55,000 games on Steam, several critical drivers determine a video game's visibility, market fit, and financial outcome:
 
-Mac & Linux Porting Trends: Alternative platforms are leverageable mainly by lighter categories like Casual, Indie, and Strategy, whereas resource-intensive genres like Action and RPG remain largely exclusive to Windows due to high development and optimization costs.
+Windows Hegemony: Windows remains the absolute, non-negotiable standard for PC gaming, maintaining a near-monopoly across the storefront. While multi-platform support (Mac/Linux) is a common accessibility trend for lighter categories like Casual and Indie, resource-intensive AAA titles can safely bypass alternative OS porting to minimize development and optimization costs.
 
-The Revenue Focus: While independent games saturate the platform in terms of total volume, real financial value and mass player engagement are heavily concentrated within the Action and RPG segments. This strongly validates Ubisoft's core strategic focus on premium, large-scale AAA productions.
+The Revenue Focus & Pricing Strategy: Although independent titles structurally saturate Steam's volume, financial resilience is driven by specific pricing power. Simulation and Strategy genres hold the highest average prices on the market, showing that highly-engaged player bases are willing to pay a premium. Meanwhile, the general catalog is saturated with micro-products below $4.99, meaning premium titles must heavily showcase their production value to justify higher price tiers.
 
-Global Accessibility & Saturation: With the post-COVID surge and a pricing ecosystem saturated by sub-$5 micro-products, discoverability is highly competitive. To maximize the addressable market, full localization in English and Chinese is mandatory, while maintaining impeccable day-one technical execution to secure algorithmic validation via positive user reviews.
+Post-COVID Market Saturation & Timing: Publication volume peaked dramatically in 2021, leading to extreme competition for visibility. To break through this noise, initial algorithmic momentum is vital. As proven by the presence of titles like Portal 2 or Left 4 Dead 2 in the Hall of Fame, long-term player retention and high review scores are the strongest organic growth drivers on Steam.
 
-Promotion & Longevity: Discount cultures are heavily embedded within Steam's buyer behavior. Implementing aggressive discount strategies is key to revitalizing a game's lifecycle and converting wishlists into concrete sales over time.
+Global Accessibility & Localization: Reaching commercial viability requires expanding beyond historical Western territories. While English is foundational, Simplified Chinese, Russian, and Brazilian Portuguese represent the largest linguistic player pools. Full localization into these high-growth regions is a mandatory strategic requirement for any upcoming launch.
+
+Promotion & Longevity: Discount cultures are heavily embedded within Steam's buyer behavior. Running continuous and strategic seasonal promotions is not an exception but an industry standard required to convert wishlists into concrete revenue and sustain a game's lifecycle.
 
 ## 📂 Structure du Projet
 📦 projet-steam-bigdata

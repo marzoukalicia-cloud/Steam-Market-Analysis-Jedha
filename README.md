@@ -57,15 +57,14 @@ pip install pyspark
 ```
 
 ## 💻 Stack Technique
-Outil,Usage
 
-PySpark,"Traitement distribué des données (DataFrames, transformations complexes, Window Functions, Regex)"
+PySpark: "Traitement distribué des données (DataFrames, transformations complexes, Window Functions, Regex)"
 
-Databricks,"Environnement d'exécution cloud, visualisation avancée (Charts natifs) et dashboarding"
+Databricks: "Environnement d'exécution cloud, visualisation avancée (Charts natifs) et dashboarding"
 
-AWS S3,"Data Lake cloud, stockage de la source JSON brute distribuée"
+AWS S3: "Data Lake cloud, stockage de la source JSON brute distribuée"
 
-Python,"Langage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)"
+Python: "Langage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)"
 
 ## 🚀 Synthèse Décisionnelle : Qu'est-ce qui dicte les ventes sur Steam ?
 L'analyse finale de nos données met en évidence trois piliers fondamentaux pour la feuille de route d'Ubisoft :

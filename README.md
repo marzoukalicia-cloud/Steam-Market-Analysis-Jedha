@@ -21,9 +21,9 @@ L'intégralité de l'analyse repose sur un jeu de données semi-structuré (JSON
 ## 📬 Liens des Notebooks Databricks Publics
 Pour contourner les contraintes techniques de taille limite de publication de Databricks et garantir une exécution mémoire optimale sur les clusters Spark, le projet a été scindé en deux volets hautement complémentaires :
 
-* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro]([COLLE_ICI_TON_LIEN_PUBLISHED_1])**
+* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro]([https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392])**
   * *Périmètre technique :* Connexion au bucket Amazon S3, extraction et aplatissement dynamique (*flattening*) du schéma JSON imbriqué, typage strict des données et analyses macro-économiques (Q1 à Q6 + Q13).
-* **[🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes]([COLLE_ICI_TON_LIEN_PUBLISHED_2])**
+* **[🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes]([https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392])**
   * *Périmètre technique :* Explosion des chaînes de caractères composites (`F.explode`) pour isoler les genres de façon unitaire, implémentation de fonctions de fenêtrage avancées (`Window.partitionBy`), modélisation du chiffre d'affaires estimé et matrices de compatibilité technique par OS (Q7 à Q12).
 
 ---
@@ -57,12 +57,11 @@ pip install pyspark
 ```
 
 ## 💻 Stack Technique
-Outil Usage
-PySpark Traitement distribué des données (DataFrames, transformations complexes, Window Functions, Regex)
-DatabricksEnvironnement d'exécution cloud, visualisation avancée (Charts natifs) et dashboarding
-AWS S3
-Data Lake cloud, stockage de la source JSON brute distribuée
-PythonLangage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)
+Outil,Usage
+PySpark,"Traitement distribué des données (DataFrames, transformations complexes, Window Functions, Regex)"
+Databricks,"Environnement d'exécution cloud, visualisation avancée (Charts natifs) et dashboarding"
+AWS S3,"Data Lake cloud, stockage de la source JSON brute distribuée"
+Python,"Langage principal, manipulation de chaînes de caractères et fonctions natives (builtins.round)"
 
 ## 🚀 Synthèse Décisionnelle : Qu'est-ce qui dicte les ventes sur Steam ?
 L'analyse finale de nos données met en évidence trois piliers fondamentaux pour la feuille de route d'Ubisoft :

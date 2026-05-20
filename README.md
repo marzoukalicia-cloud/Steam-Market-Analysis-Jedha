@@ -6,7 +6,7 @@ L'objectif de ce projet est d'exploiter les capacités de traitement de PySpark 
 ---
 
 ## 💾 Source des Données
-Les analyses s'appuient sur un jeu de données semi-structuré (JSON) regroupant l'ensemble des métadonnées des jeux :
+Les analyses s'appuient sur un jeu de données semi-structuré (JSON) regroupant l'ensemble des métadonnées des jeux:
 * **Lien du Dataset S3 :** `s3://full-stack-bigdata-datasets/Big_Data/Project_Steam/steam_game_output.json`
 
 ---
@@ -15,9 +15,11 @@ Les analyses s'appuient sur un jeu de données semi-structuré (JSON) regroupant
 
 Pour contourner les contraintes techniques liées à la taille limite de publication de Databricks, le projet a été scindé en deux volets autonomes et complémentaires :
 
-* **[🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro] lien databriks:(https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392)**
+* **🔗 Partie 1 : Chargement, Nettoyage & Analyse Macro
+* lien databriks: (https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/1871887574472583?o=7474652616624392)**
   * *Périmètre :* Connexion au stockage Amazon S3, extraction et aplatissement dynamique (*flattening*) des structures imbriquées du schéma JSON (gestion des tags), typage strict des données et analyses macro-économiques.
-* **[🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes] lien databriks: (https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)**
+* **🔗 Partie 2 : Analyses Sectorielles — Genres & Plateformes
+* lien databriks: (https://dbc-9df0b3e7-71bd.cloud.databricks.com/editor/notebooks/4473242428596805?o=7474652616624392)**
   * *Périmètre :* Explosion des chaînes de caractères de données composites (`F.explode`), calcul des taux de satisfaction réels, fonctions de fenêtrage avancées (`Window.partitionBy`) pour analyser les stratégies éditeurs, modélisation des revenus et matrices de compatibilité technique.
 
 ---

@@ -1,4 +1,5 @@
 # 🎮 Big Data Project — Steam Market Analysis (Ubisoft)
+The dataset is available in our S3 bucket at the following url: s3://full-stack-bigdata-datasets/Big_Data/Project_Steam/steam_game_output.json.
 
 ## 🎯 Objectifs du Projet
 Ce projet d'Analyse Exploratoire de Données (EDA) a été réalisé dans un contexte de Business Intelligence pour le compte d'Ubisoft. L'objectif principal est d'analyser globalement le marché de la plateforme Steam à l'aide de technologies Big Data afin de modéliser et comprendre les facteurs clés qui dictent la popularité, la satisfaction et la rentabilité (chiffre d'affaires estimé) des jeux vidéo.
